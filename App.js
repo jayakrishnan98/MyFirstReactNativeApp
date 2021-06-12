@@ -14,8 +14,9 @@ import GoalInput from "./components/GoalInput";
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
+  
   const addGoalHandler = (goalTitle) => {
-    setCourseGoals((currentGoals) => [
+    setCourseGoals(() => [
       ...courseGoals,
       { key: Math.random().toString(), value: goalTitle },
     ]); //we can also use id instead of key. But try "uid" and you'll see the warning though.
