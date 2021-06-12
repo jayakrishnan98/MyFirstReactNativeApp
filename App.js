@@ -14,7 +14,6 @@ import GoalInput from "./components/GoalInput";
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
-  
   const addGoalHandler = (goalTitle) => {
     setCourseGoals(() => [
       ...courseGoals,
@@ -28,7 +27,12 @@ export default function App() {
 
       <FlatList
         data={courseGoals}
-        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
+        renderItem={(itemData) => (
+          <GoalItem
+            onDelete={() => console.log("Does that work")}
+            title={itemData.item.value}
+          />
+        )}
       />
     </View>
   );
