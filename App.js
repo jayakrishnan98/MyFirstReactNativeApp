@@ -17,8 +17,14 @@ export default function App() {
   const addGoalHandler = (goalTitle) => {
     setCourseGoals(() => [
       ...courseGoals,
-      { key: Math.random().toString(), value: goalTitle },
-    ]); //we can also use id instead of key. But try "uid" and you'll see the warning though.
+      { id: Math.random().toString(), value: goalTitle },
+    ]); //we can also use key instead of id. But try "uid" and you'll see the warning though.
+  };
+
+  const removeGoalHandler = (goalId) => {
+    setCourseGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.id !== goalId);
+    });
   };
 
   return (
@@ -26,11 +32,15 @@ export default function App() {
       <GoalInput onAddGoal={addGoalHandler} />
 
       <FlatList
+        keyExtractor={(item, index) => {
+          item.id;
+        }}
         data={courseGoals}
         renderItem={(itemData) => (
           <GoalItem
-            onDelete={() => console.log("Does that work")}
+            onDelete={removeGoalHandler}
             title={itemData.item.value}
+            id={itemData.item.id}
           />
         )}
       />
