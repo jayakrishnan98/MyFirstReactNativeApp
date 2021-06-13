@@ -13,6 +13,7 @@ import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false)
 
   const addGoalHandler = (goalTitle) => {
     setCourseGoals(() => [
@@ -24,12 +25,13 @@ export default function App() {
   const removeGoalHandler = (goalId) => {
     setCourseGoals((currentGoals) => {
       return currentGoals.filter((goal) => goal.id !== goalId);
-    });
+    });  
   };
 
   return (
     <View style={styles.screen}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title = "Add First Todo" onPress={()=> setIsAddMode(true)}/>
+      <GoalInput visible = {isAddMode} onAddGoal={addGoalHandler} />
 
       <FlatList
         keyExtractor={(item, index) => {
@@ -40,7 +42,7 @@ export default function App() {
           <GoalItem
             onDelete={removeGoalHandler}
             title={itemData.item.value}
-            id={itemData.item.id}
+            id={itemData.item.id} //converted key to id because only id worked here
           />
         )}
       />
