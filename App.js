@@ -20,17 +20,19 @@ export default function App() {
       ...courseGoals,
       { id: Math.random().toString(), value: goalTitle },
     ]); //we can also use key instead of id. But try "uid" and you'll see the warning though.
+    setIsAddMode(false);
   };
 
   const removeGoalHandler = (goalId) => {
     setCourseGoals((currentGoals) => {
       return currentGoals.filter((goal) => goal.id !== goalId);
     });  
+
   };
 
   return (
     <View style={styles.screen}>
-      <Button title = "Add First Todo" onPress={()=> setIsAddMode(true)}/>
+      <Button title = "Add New Goal" onPress={()=> setIsAddMode(true)}/>
       <GoalInput visible = {isAddMode} onAddGoal={addGoalHandler} />
 
       <FlatList
